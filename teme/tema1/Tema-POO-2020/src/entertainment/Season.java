@@ -28,6 +28,10 @@ public final class Season {
         this.ratings = new ArrayList<>();
     }
 
+    public int getCurrentSeason() {
+        return currentSeason;
+    }
+
     public int getDuration() {
         return duration;
     }
