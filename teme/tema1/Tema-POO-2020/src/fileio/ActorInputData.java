@@ -28,6 +28,10 @@ public final class ActorInputData {
      */
     private Map<ActorsAwards, Integer> awards;
 
+    private Double grade; // retin media notele video-urilor in care a jucat actorul
+
+    private Integer nrAwards;
+
     public ActorInputData(final String name, final String careerDescription,
                           final ArrayList<String> filmography,
                           final Map<ActorsAwards, Integer> awards) {
@@ -35,6 +39,8 @@ public final class ActorInputData {
         this.careerDescription = careerDescription;
         this.filmography = filmography;
         this.awards = awards;
+        this.grade = 0.0;
+        this.nrAwards = 0;
     }
 
     public String getName() {
@@ -61,8 +67,24 @@ public final class ActorInputData {
         return careerDescription;
     }
 
+    public Double getGrade() {
+        return grade;
+    }
+
+    public void setGrade(final Double grade) {
+        this.grade = grade;
+    }
+
     public void setCareerDescription(final String careerDescription) {
         this.careerDescription = careerDescription;
+    }
+
+    public Integer getNrAwards() {
+        return nrAwards;
+    }
+
+    public void setNrAwards(final Integer nrAwards) {
+        this.nrAwards = nrAwards;
     }
 
     @Override

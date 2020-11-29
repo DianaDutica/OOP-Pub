@@ -25,12 +25,23 @@ public abstract class ShowInput {
      */
     private final ArrayList<String> genres;
 
+    // retin media unui video - daca este movie, media tuturor notelor,
+    // daca este show, media mediilor sezoanelor
+    private Double mediumgrade;
+
+    private Integer totalviews;
+
+    private Integer totalfavorites;
+
     public ShowInput(final String title, final int year,
                      final ArrayList<String> cast, final ArrayList<String> genres) {
         this.title = title;
         this.year = year;
         this.cast = cast;
         this.genres = genres;
+        this.mediumgrade = 0.0;
+        this.totalviews = 0;
+        this.totalfavorites = 0;
     }
 
     public final String getTitle() {
@@ -48,4 +59,53 @@ public abstract class ShowInput {
     public final ArrayList<String> getGenres() {
         return genres;
     }
+
+    /**
+     *
+     * @return
+     */
+    public Double getMediumgrade() {
+        return mediumgrade;
+    }
+
+    /**
+     *
+     * @param mediumgrade
+     */
+    public void setMediumgrade(final Double mediumgrade) {
+        this.mediumgrade = mediumgrade;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public Integer getTotalviews() {
+        return totalviews;
+    }
+
+    /**
+     *
+     * @param totalviews
+     */
+    public void setTotalviews(final Integer totalviews) {
+        this.totalviews = totalviews;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public Integer getTotalfavorites() {
+        return totalfavorites;
+    }
+
+    /**
+     *
+     * @param totalfavorites
+     */
+    public void setTotalfavorites(final Integer totalfavorites) {
+        this.totalfavorites = totalfavorites;
+    }
+
 }

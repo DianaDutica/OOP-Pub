@@ -13,15 +13,30 @@ public final class MovieInputData extends ShowInput {
      */
     private final int duration;
 
+    private ArrayList<Double> grade;    // tin intr-o lista notele acordate filmului
+
     public MovieInputData(final String title, final ArrayList<String> cast,
                           final ArrayList<String> genres, final int year,
                           final int duration) {
         super(title, year, cast, genres);
         this.duration = duration;
+        this.grade = new ArrayList<Double>();
     }
 
     public int getDuration() {
         return duration;
+    }
+
+    public ArrayList<Double> getGrade() {
+        return grade;
+    }
+
+    /**
+     *
+     * @param grade
+     */
+    public void addGrade(final Double grade) {
+        this.grade.add(grade);
     }
 
     @Override
