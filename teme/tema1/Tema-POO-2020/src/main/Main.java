@@ -1,10 +1,18 @@
 package main;
 
+import action.Command;
+import action.Query;
+import action.Recommendation;
 import checker.Checkstyle;
 import checker.Checker;
 import common.Constants;
+import fileio.ActionInputData;
+import fileio.ActorInputData;
 import fileio.Input;
 import fileio.InputLoader;
+import fileio.MovieInputData;
+import fileio.SerialInputData;
+import fileio.UserInputData;
 import fileio.Writer;
 import org.json.simple.JSONArray;
 
@@ -13,7 +21,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.Objects;
+
+import static user.UserFavorites.initialFavorites;
+import static user.UserViews.initialViews;
 
 /**
  * The entry point to this homework. It runs the checker that tests your implentation.
@@ -71,7 +83,30 @@ public final class Main {
         JSONArray arrayResult = new JSONArray();
 
         //TODO add here the entry point to your implementation
+        List<ActionInputData> actionData = input.getCommands();
+        List<UserInputData> userData = input.getUsers();
+        List<MovieInputData> movieData = input.getMovies();
+        List<SerialInputData> serialData = input.getSerials();
+        List<ActorInputData> actorData = input.getActors();
 
+        initialViews(userData, movieData, serialData);
+        initialFavorites(userData, movieData, serialData);
+        for (ActionInputData action : actionData) {
+            if (action.getActionType().equals("command")) {
+                arrayResult.add(Command.executeCommand(action, userData,
+                                                                        movieData, serialData));
+            }
+
+            if (action.getActionType().equals("query")) {
+                arrayResult.add(Query.executeQuery(action, userData, movieData,
+                                                                        serialData, actorData));
+            }
+
+            if (action.getActionType().equals("recommendation")) {
+                arrayResult.add(Recommendation.executeRecommendation(action, userData,
+                                                                        movieData, serialData));
+            }
+        }
         fileWriter.closeJSON(arrayResult);
     }
 }
