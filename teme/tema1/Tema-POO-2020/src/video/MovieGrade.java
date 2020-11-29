@@ -4,8 +4,15 @@ import fileio.MovieInputData;
 
 import java.util.List;
 
-public class Movie_grade {
-    public static void movie_grade(final List<MovieInputData> movieData) {
+/**
+ *
+ */
+public class MovieGrade {
+    /**
+     *
+     * @param movieData
+     */
+    public static void movieGrade(final List<MovieInputData> movieData) {
         for (MovieInputData movie : movieData) { // parcurg toate filmele
             Double sum = 0.0;
             for (Double grade : movie.getGrade()) { // adun rating-urile lor in sum

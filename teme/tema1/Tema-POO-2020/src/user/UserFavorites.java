@@ -5,11 +5,21 @@ import fileio.SerialInputData;
 import fileio.UserInputData;
 
 import java.util.List;
-import java.util.Map;
 
-public class User_favorites {
-    public static void initial_favorites(List<UserInputData> userData, List<MovieInputData> movieData, List<SerialInputData> serialData) {
-        for(UserInputData user : userData) {
+/**
+ *
+ */
+public class UserFavorites {
+    /**
+     *
+     * @param userData
+     * @param movieData
+     * @param serialData
+     */
+    public static void initialFavorites(final List<UserInputData> userData,
+                                         final List<MovieInputData> movieData,
+                                         final List<SerialInputData> serialData) {
+        for (UserInputData user : userData) {
             for (String favorite : user.getFavoriteMovies()) {
                 for (MovieInputData movie : movieData) {
                     if (movie.getTitle().equals(favorite)) {
