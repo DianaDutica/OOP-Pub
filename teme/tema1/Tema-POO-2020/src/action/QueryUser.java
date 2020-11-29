@@ -12,8 +12,11 @@ import java.util.stream.Collectors;
 /**
  *
  */
-public class Query_user {
+public class QueryUser {
     /**
+     * Sortez utilizatorii alfabetic si dupa campul totalReviews, iar cu ajutorul
+     * variabilei maxUsers pun in lista doar n utilizatori, primii ordonati dupa
+     * cate vizualizari au dat.
      * @param query
      * @param userData
      * @return

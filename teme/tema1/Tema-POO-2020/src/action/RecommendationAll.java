@@ -13,9 +13,10 @@ import java.util.stream.Collectors;
 import static video.MovieGrade.movieGrade;
 import static video.SerialGrade.serialGrade;
 
-public class Recommendation_all {
+public class RecommendationAll {
     /**
-     *
+     * Iterez prin toate filmele si serialele si primul video care nu este
+     * in user.History il returnez.
      * @param action
      * @param userData
      * @param movieData
@@ -59,7 +60,8 @@ public class Recommendation_all {
     }
 
     /**
-     *
+     * Sortez atat filmele, cat si serialele dupa mediumgrade si procedez la fel ca
+     * la task-ul anterior.
      * @param action
      * @param userData
      * @param movieData
@@ -101,7 +103,7 @@ public class Recommendation_all {
         for (UserInputData user : userData) {
             if (action.getUsername().equals(user.getUsername())) {
                 for (SerialInputData serial : copySerialData) {
-                    if (user.getHistory().containsKey(serial.getTitle()) == false) {
+                    if (!user.getHistory().containsKey(serial.getTitle())) {
                         jsonObject.put("message", "BestRatedUnseenRecommendation result: "
                                                                             + serial.getTitle());
                         return jsonObject;

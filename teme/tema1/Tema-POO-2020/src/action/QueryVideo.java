@@ -14,15 +14,17 @@ import java.util.stream.Collectors;
 import static video.MovieGrade.movieGrade;
 import static video.SerialGrade.serialGrade;
 
-public class Query_video {
+public class QueryVideo {
     /**
-     *
+     * Indiferent de campul dupa care fac sortarile, verific filtrele de an si de
+     * genre si daca nu respecta un film aceste filtre il elimin din
+     * duplicateMovieData, duplicateSerialData.
      * @param query
      * @param movieData
      * @param serialData
      * @return
      */
-    public static JSONObject executeQuery_video(final ActionInputData query,
+    public static JSONObject executeQueryVideo(final ActionInputData query,
                                                 final List<MovieInputData> movieData,
                                                 final List<SerialInputData> serialData) {
         JSONObject jsonObject  = new JSONObject();
@@ -34,7 +36,7 @@ public class Query_video {
 
             // daca sunt in cazul in care am filme
             if (query.getObjectType().equals("movies")) {
-                int max_movies = 0;
+                int maxMovies = 0;
 
                 // reinitializez campul mediumgrade al filmelor
                 movieGrade(movieData);
@@ -42,7 +44,7 @@ public class Query_video {
                 List<MovieInputData> duplicateMovieData = new ArrayList<>(movieData);
 
                 // daca am filtre de an
-                if(query.getFilters().get(0).get(0) != null) {
+                if (query.getFilters().get(0).get(0) != null) {
                     duplicateMovieData.removeIf(movie ->
                             !query.getFilters().get(0).contains(String.valueOf(movie.getYear())));
                 }
@@ -64,9 +66,9 @@ public class Query_video {
                             .sorted(Comparator.comparingDouble(MovieInputData::getMediumgrade))
                             .collect(Collectors.toList());
                     for (MovieInputData movie : copyMovieData) {
-                        if (max_movies < query.getNumber() && movie.getMediumgrade() > 0) {
+                        if (maxMovies < query.getNumber() && movie.getMediumgrade() > 0) {
                             list.add(movie.getTitle());
-                            max_movies++;
+                            maxMovies++;
                         }
                     }
                 } else {
@@ -77,16 +79,16 @@ public class Query_video {
                             .sorted(Comparator.comparingDouble(MovieInputData::getMediumgrade)
                                     .reversed()).collect(Collectors.toList());
                     for (MovieInputData movie : copyMovieData) {
-                        if (max_movies < query.getNumber() && movie.getMediumgrade() > 0) {
+                        if (maxMovies < query.getNumber() && movie.getMediumgrade() > 0) {
                             list.add(movie.getTitle());
-                            max_movies++;
+                            maxMovies++;
                         }
                     }
                 }
 
             // daca sunt in cazul in care am seriale
             } else {
-                int max_serials = 0;
+                int maxSerials = 0;
 
                 // reinitializez campul mediumgrade al serialelor
                 serialGrade(serialData);
@@ -116,9 +118,9 @@ public class Query_video {
                             .sorted(Comparator.comparingDouble(SerialInputData::getMediumgrade))
                             .collect(Collectors.toList());
                     for (SerialInputData serial : copySerialData) {
-                        if (max_serials < query.getNumber() && serial.getMediumgrade() > 0) {
+                        if (maxSerials < query.getNumber() && serial.getMediumgrade() > 0) {
                             list.add(serial.getTitle());
-                            max_serials++;
+                            maxSerials++;
                         }
                     }
                 } else {
@@ -129,9 +131,9 @@ public class Query_video {
                             .sorted(Comparator.comparingDouble(SerialInputData::getMediumgrade)
                                     .reversed()).collect(Collectors.toList());
                     for (SerialInputData serial : copySerialData) {
-                        if (max_serials < query.getNumber() && serial.getMediumgrade() > 0) {
+                        if (maxSerials < query.getNumber() && serial.getMediumgrade() > 0) {
                             list.add(serial.getTitle());
-                            max_serials++;
+                            maxSerials++;
                         }
                     }
                 }
@@ -151,7 +153,7 @@ public class Query_video {
                 List<MovieInputData> duplicateMovieData = new ArrayList<>(movieData);
 
                 // daca am filtre de an
-                if ( query.getFilters().get(0).get(0) != null ) {
+                if (query.getFilters().get(0).get(0) != null) {
                     duplicateMovieData.removeIf(movie ->
                             !query.getFilters().get(0).contains(String.valueOf(movie.getYear())));
                 }
@@ -262,7 +264,7 @@ public class Query_video {
                 }
 
                 // daca am filtre de genre
-                if(query.getFilters().get(1).get(0) != null) {
+                if (query.getFilters().get(1).get(0) != null) {
                     duplicateMovieData.removeIf(movie -> Collections
                             .disjoint(query.getFilters().get(1), movie.getGenres()));
                 }

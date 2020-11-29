@@ -18,16 +18,17 @@ import static video.ActorGrade.actorGrade;
 import static video.MovieGrade.movieGrade;
 import static video.SerialGrade.serialGrade;
 
-public class Query_actor {
+public class QueryActor {
     /**
-     *
+     * In fiecare caz fac sortari dupa criteriul cerut si alfabetic(in alfaActorData)
+     * tinand cont de tipul sortarii "asc" sau "desc".
      * @param query
      * @param movieData
      * @param serialData
      * @param actorData
      * @return
      */
-    public static JSONObject executeQuery_actor(final ActionInputData query,
+    public static JSONObject executeQueryActor(final ActionInputData query,
                                                 final List<MovieInputData> movieData,
                                                 final List<SerialInputData> serialData,
                                                 final List<ActorInputData> actorData) {
